@@ -67,20 +67,27 @@ namespace ConsoleApp1
         }
         public static int GetAmountOfDivisors()
         {
-            int amountOfKeyValuePairs;
             while (true)
             {
                 Console.Write("ENTER number of divisors: ");
                 Console.ForegroundColor = ConsoleColor.Red;
 
-                int.TryParse(Console.ReadLine(), out int amount);
-                if (amount != 0)
+                string? line = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(line))
                 {
-                    amountOfKeyValuePairs = amount;
-                    break;
+                    Console.WriteLine("⚠️ Input was empty. Try again.");
+                    continue;
                 }
+
+                if (int.TryParse(line, out int amount) && amount > 0)
+                {
+                    return amount;
+                }
+
+                Console.WriteLine("❌ Invalid input. Please enter a positive integer greater than 0.");
             }
-            return amountOfKeyValuePairs;
         }
+
     }
 }
